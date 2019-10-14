@@ -9,7 +9,21 @@ const dogSummary = document.querySelector("#dog-summary-container")
 function getDogs() {
     fetch(mainUrl + "pups")
     .then(response => response.json())
-    .then(dogs => listDogs(dogs))
+    .then(dogs => {
+
+        listDogs(dogs)
+
+        filterButton.addEventListener("click", (e) => {
+            if (filterButton.innerText = "Filter good dogs: OFF") {
+                filterButton.innerText = "Filter good dogs: ON"
+                listDogs(dogs.filter(dog => dog.isGoodDog))
+            }
+            else {
+                filterButton.innerText = "Filter good dogs: OFF"
+                listDogs(dogs)
+            }
+        })
+    })
 }
 
 function listDogs(dogs) {
